@@ -1,50 +1,27 @@
 
-var Nav = React.createClass({
-    displayName: "Nav",
+
+var Page = React.createClass({
+    displayName: "Page",
 
     render: function () {
         return React.createElement(
-            "nav",
-            { className: "navbar navbar-inverse" },
+            "myElement",
+            null,
+            React.createElement(Nav, { title: "React", linkUrl: "index.html" }),
             React.createElement(
                 "div",
                 { className: "container" },
+                React.createElement(Title, { title: "Reclame Aqui!" }),
                 React.createElement(
                     "div",
-                    { className: "navbar-header" },
-                    React.createElement(
-                        "a",
-                        { href: this.props.linkUrl, className: "navbar-brand" },
-                        this.props.title
-                    )
+                    { className: "row" },
+                    React.createElement(Form, null),
+                    React.createElement(Button, { title: "Send", textActive: "Loading..." })
                 )
             )
         );
     }
+
 });
 
-var Title = React.createClass({
-    displayName: "Title",
-
-    render: function () {
-        return React.createElement(
-            "div",
-            { className: "container" },
-            React.createElement(
-                "div",
-                { className: "row" },
-                React.createElement(
-                    "h1",
-                    null,
-                    " ",
-                    this.props.title,
-                    " "
-                )
-            )
-        );
-    }
-});
-
-ReactDOM.render(React.createElement(Nav, { title: "React", linkUrl: "index.html" }), document.getElementById('nav'));
-
-ReactDOM.render(React.createElement(Title, { title: "My Component title!" }), document.getElementById('title'));
+ReactDOM.render(React.createElement(Page, null), document.getElementById('page'));

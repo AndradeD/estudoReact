@@ -1,39 +1,25 @@
 
-var Nav = React.createClass({
-    render : function(){
-        return (
-            <nav className="navbar navbar-inverse">
+
+var Page = React.createClass({
+   render:function(){
+       return(
+            <myElement>
+                <Nav title="React" linkUrl="index.html"/>
                 <div className="container">
-                    <div className="navbar-header">
-                        <a href={ this.props.linkUrl } className="navbar-brand">
-                            { this.props.title }
-                        </a>
+                    <Title title="Reclame Aqui!" />
+                    <div className="row">
+                        <Form />
+                        <Button title="Send" textActive="Loading..." />
                     </div>
                 </div>
-            </nav>
-        );
-    }
-})
+            </myElement>
 
-var Title = React.createClass({
-    render: function(){
-        return (
-            <div className="container">
-                <div className="row">
-                    <h1> { this.props.title } </h1>
-                </div>
-            </div>
-        );
-    }
-})
+       );
+   }
 
+});
 
 ReactDOM.render(
-    <Nav title="React" linkUrl="index.html"/>,
-    document.getElementById('nav')
-);
-
-ReactDOM.render(
-    <Title title="My Component title!" />,
-    document.getElementById('title')
+    <Page />,
+    document.getElementById('page')
 );
