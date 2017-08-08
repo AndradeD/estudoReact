@@ -29,22 +29,73 @@ var Title = React.createClass({
     render: function () {
         return React.createElement(
             "div",
-            { className: "container" },
+            { className: "row" },
             React.createElement(
-                "div",
-                { className: "row" },
-                React.createElement(
-                    "h1",
-                    null,
-                    " ",
-                    this.props.title,
-                    " "
-                )
+                "h1",
+                null,
+                " ",
+                this.props.title,
+                " "
             )
         );
     }
 });
 
-ReactDOM.render(React.createElement(Nav, { title: "React", linkUrl: "index.html" }), document.getElementById('nav'));
+var Button = React.createClass({
+    displayName: "Button",
 
-ReactDOM.render(React.createElement(Title, { title: "My Component title!" }), document.getElementById('title'));
+
+    getInitialState: function () {
+        return {
+            click: false
+        };
+    },
+    toggleClick: function () {
+        this.setState({
+            click: !this.state.click
+        });
+    },
+    render: function () {
+
+        var btnClass = null;
+        var title = null;
+        if (this.state.click) {
+            btnClass = 'btn btn-warning';
+            title = this.props.textActive;
+        } else {
+            btnClass = 'btn btn-success';
+            title = this.props.title;
+        }
+
+        return React.createElement(
+            "button",
+            { onClick: this.toggleClick, className: btnClass },
+            title
+        );
+    }
+});
+
+var Page = React.createClass({
+    displayName: "Page",
+
+    render: function () {
+        return React.createElement(
+            "myElement",
+            null,
+            React.createElement(Nav, { title: "React", linkUrl: "index.html" }),
+            React.createElement(
+                "div",
+                { className: "container" },
+                React.createElement(Title, { title: "My Component title!" }),
+                React.createElement(
+                    "div",
+                    { className: "row" },
+                    React.createElement(Button, { title: "My Button", textActive: "Loading..." })
+                )
+            )
+        );
+    }
+
+});
+
+ReactDOM.render(React.createElement(Page, null), document.getElementById('page'));
