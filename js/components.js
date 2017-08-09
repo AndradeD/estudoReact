@@ -39,7 +39,7 @@ var Title = React.createClass({
                 "h1",
                 { style: TitleStyle },
                 " ",
-                this.props.title,
+                this.props.children,
                 " "
             )
         );
@@ -69,7 +69,7 @@ var Button = React.createClass({
             title = this.props.textActive;
         } else {
             btnClass = 'btn btn-success';
-            title = this.props.title;
+            title = this.props.children;
         }
 
         return React.createElement(
@@ -112,6 +112,34 @@ var Form = React.createClass({
                     "Email"
                 ),
                 React.createElement("input", { type: "email", className: "form-control", id: "email", placeholder: "Email", style: InputStyle })
+            ),
+            React.createElement(
+                "div",
+                { className: "form-group" },
+                React.createElement(
+                    "label",
+                    { htmlFor: "subject" },
+                    "Subject"
+                ),
+                React.createElement(
+                    "select",
+                    { defaultValue: "3", className: "form-control", id: "subject" },
+                    React.createElement(
+                        "option",
+                        { value: "1" },
+                        "Angular"
+                    ),
+                    React.createElement(
+                        "option",
+                        { value: "2" },
+                        "JQuery"
+                    ),
+                    React.createElement(
+                        "option",
+                        { value: "3" },
+                        "React"
+                    )
+                )
             ),
             React.createElement(
                 "div",

@@ -6,10 +6,14 @@ var Page = React.createClass({
             <myElement>
                 <Nav title="React" linkUrl="index.html"/>
                 <div className="container">
-                    <Title title="Reclame Aqui!" />
+                    <Title>
+                        Reclame Aqui!
+                    </Title>
                     <div className="row">
                         <Form />
-                        <Button title="Send" textActive="Loading..." />
+                        <Button textActive="Loading...">
+                            Enviar.
+                        </Button>
                     </div>
                 </div>
             </myElement>

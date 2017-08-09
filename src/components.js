@@ -24,7 +24,7 @@ var Title = React.createClass({
 
         return (
             <div className="row">
-                <h1 style={ TitleStyle }> { this.props.title } </h1>
+                <h1 style={ TitleStyle }> { this.props.children } </h1>
             </div>
         );
     }
@@ -52,7 +52,7 @@ var Button = React.createClass({
             title = this.props.textActive;
         }else{
             btnClass = 'btn btn-success';
-            title = this.props.title;
+            title = this.props.children;
         }
 
         return (
@@ -82,8 +82,16 @@ var Form = React.createClass({
                    <input type="email" className="form-control" id="email" placeholder="Email" style={InputStyle} />
                </div>
                <div className="form-group">
+                   <label htmlFor="subject">Subject</label>
+                   <select defaultValue="3" className="form-control" id="subject">
+                       <option value="1">Angular</option>
+                       <option value="2">JQuery</option>
+                       <option value="3">React</option>
+                   </select>
+               </div>
+               <div className="form-group">
                    <label htmlFor="message">Mensagem</label>
-                   <textarea className="form-control" id="message" rows="3" style={InputStyle}></textarea>
+                   <textarea className="form-control" id="message" rows="3" style={ InputStyle } />
                </div>
            </form>
        );
