@@ -63,27 +63,52 @@ var Button = React.createClass({
     }
 });
 
+
 var Form = React.createClass({
-   render: function(){
+
+    getInitialState:function(){
+        return {
+            name:'',
+            email:'',
+            subject:'3',
+            message:'',
+        }
+    },
+
+    handleNameChange:function(e){
+        this.setState({name: e.target.value});
+        console.log(this.state.name);
+    },
+    handleEmailChange:function(e){
+        this.setState({email: e.target.value});
+    },
+    handleSubjectChange:function(e){
+        this.setState({subject: e.target.value});
+    },
+    handleMessageChange:function(e){
+        this.setState({message: e.target.value});
+    },
+
+   render: function() {
        var InputStyle = {
-            padding:"20px",
-            fontSize:"16px",
-            color:"#A7A5A5"
+           padding: "20px",
+           fontSize: "16px",
+           color: "#A7A5A5"
        };
 
-       return(
+       return (
            <form>
                <div className="form-group">
                    <label htmlFor="name">Name</label>
-                   <input type="text" className="form-control" id="name" placeholder="Name" style={InputStyle}/>
+                   <input type="text" className="form-control" onChange={ this.handleNameChange } placeholder="Name" style={InputStyle}/>
                </div>
                <div className="form-group">
                    <label htmlFor="email">Email</label>
-                   <input type="email" className="form-control" id="email" placeholder="Email" style={InputStyle} />
+                   <input type="email" className="form-control" onChange={this.handleEmailChange} placeholder="Email" style={InputStyle}/>
                </div>
                <div className="form-group">
                    <label htmlFor="subject">Subject</label>
-                   <select defaultValue="3" className="form-control" id="subject">
+                   <select defaultValue={this.state.subject} className="form-control" onChange={this.handleSubjectChange}>
                        <option value="1">Angular</option>
                        <option value="2">JQuery</option>
                        <option value="3">React</option>
@@ -91,11 +116,52 @@ var Form = React.createClass({
                </div>
                <div className="form-group">
                    <label htmlFor="message">Mensagem</label>
-                   <textarea className="form-control" id="message" rows="3" style={ InputStyle } />
+                   <textarea className="form-control" onChange={this.handleMessageChange} rows="3" style={InputStyle}/>
                </div>
            </form>
        );
    }
+});
 
+var Contact = React.createClass({
+   render: function(){
+       return (
+           <tr>
+               <th scope="row">{this.props.idNumber}</th>
+               <td>{this.props.name}</td>
+               <td>{this.props.email}</td>
+               <td>{this.props.subject}</td>
+               <td>{this.props.children}</td>
+           </tr>
+       );
+   }
+});
 
+var List = React.createClass({
+    render: function () {
+        var contactNodes = this.props.data.map(function (contact) {
+            return(
+                <Contact idNumber={contact.id} name={contact.name} email={contact.email} subject={contact.subject}>
+                    {contact.message}
+                </Contact>
+            );
+        });
+
+        return (
+            <table className="table">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Subject</th>
+                    <th>Message</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {contactNodes}
+                </tbody>
+            </table>
+        );
+    }
 });

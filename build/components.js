@@ -83,30 +83,6 @@ var Button = React.createClass({
 var Form = React.createClass({
     displayName: "Form",
 
-
-    getInitialState: function () {
-        return {
-            name: '',
-            email: '',
-            subject: '3',
-            message: ''
-        };
-    },
-
-    handleNameChange: function (e) {
-        this.setState({ name: e.target.value });
-        console.log(this.state.name);
-    },
-    handleEmailChange: function (e) {
-        this.setState({ email: e.target.value });
-    },
-    handleSubjectChange: function (e) {
-        this.setState({ subject: e.target.value });
-    },
-    handleMessageChange: function (e) {
-        this.setState({ message: e.target.value });
-    },
-
     render: function () {
         var InputStyle = {
             padding: "20px",
@@ -125,7 +101,7 @@ var Form = React.createClass({
                     { htmlFor: "name" },
                     "Name"
                 ),
-                React.createElement("input", { type: "text", className: "form-control", onChange: this.handleNameChange, placeholder: "Name", style: InputStyle })
+                React.createElement("input", { type: "text", className: "form-control", id: "name", placeholder: "Name", style: InputStyle })
             ),
             React.createElement(
                 "div",
@@ -135,7 +111,7 @@ var Form = React.createClass({
                     { htmlFor: "email" },
                     "Email"
                 ),
-                React.createElement("input", { type: "email", className: "form-control", onChange: this.handleEmailChange, placeholder: "Email", style: InputStyle })
+                React.createElement("input", { type: "email", className: "form-control", id: "email", placeholder: "Email", style: InputStyle })
             ),
             React.createElement(
                 "div",
@@ -147,7 +123,7 @@ var Form = React.createClass({
                 ),
                 React.createElement(
                     "select",
-                    { defaultValue: this.state.subject, className: "form-control", onChange: this.handleSubjectChange },
+                    { defaultValue: "3", className: "form-control", id: "subject" },
                     React.createElement(
                         "option",
                         { value: "1" },
@@ -173,43 +149,7 @@ var Form = React.createClass({
                     { htmlFor: "message" },
                     "Mensagem"
                 ),
-                React.createElement("textarea", { className: "form-control", onChange: this.handleMessageChange, rows: "3", style: InputStyle })
-            )
-        );
-    }
-});
-
-var Contact = React.createClass({
-    displayName: "Contact",
-
-    render: function () {
-        return React.createElement(
-            "tr",
-            null,
-            React.createElement(
-                "th",
-                { scope: "row" },
-                this.props.idNumber
-            ),
-            React.createElement(
-                "td",
-                null,
-                this.props.name
-            ),
-            React.createElement(
-                "td",
-                null,
-                this.props.email
-            ),
-            React.createElement(
-                "td",
-                null,
-                this.props.subject
-            ),
-            React.createElement(
-                "td",
-                null,
-                this.props.children
+                React.createElement("textarea", { className: "form-control", id: "message", rows: "3", style: InputStyle })
             )
         );
     }
@@ -219,14 +159,6 @@ var List = React.createClass({
     displayName: "List",
 
     render: function () {
-        var contactNodes = this.props.data.map(function (contact) {
-            return React.createElement(
-                Contact,
-                { idNumber: contact.id, name: contact.name, email: contact.email, subject: contact.subject },
-                contact.message
-            );
-        });
-
         return React.createElement(
             "table",
             { className: "table" },
@@ -266,7 +198,35 @@ var List = React.createClass({
             React.createElement(
                 "tbody",
                 null,
-                contactNodes
+                React.createElement(
+                    "tr",
+                    null,
+                    React.createElement(
+                        "th",
+                        { scope: "row" },
+                        "1"
+                    ),
+                    React.createElement(
+                        "td",
+                        null,
+                        "Mariana"
+                    ),
+                    React.createElement(
+                        "td",
+                        null,
+                        "mariana@mail.com"
+                    ),
+                    React.createElement(
+                        "td",
+                        null,
+                        "3"
+                    ),
+                    React.createElement(
+                        "td",
+                        null,
+                        "My message test"
+                    )
+                )
             )
         );
     }

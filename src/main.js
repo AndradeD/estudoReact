@@ -1,6 +1,26 @@
-
+var data = [
+    {
+        id:1,name:'Mariana',email:'mariana@mail.com',subject:'3',message:'My message test'
+    },
+    {
+        id:2,name:'João',email:'joao@mail.com',subject:'1',message:'My message test'
+    }
+];
 
 var Page = React.createClass({
+
+    getInitialState: function(){
+        return {
+            data:[
+                {
+                    id:1,name:'Mariana',email:'mariana@mail.com',subject:'3',message:'My message test'
+                },
+                {
+                    id:2,name:'João',email:'joao@mail.com',subject:'1',message:'My message test'
+                }
+            ]}
+    },
+
    render:function(){
        return(
             <myElement>
@@ -14,6 +34,9 @@ var Page = React.createClass({
                         <Button textActive="Loading...">
                             Enviar.
                         </Button>
+                    </div>
+                    <div className="row">
+                        <List data={this.state.data} />
                     </div>
                 </div>
             </myElement>
