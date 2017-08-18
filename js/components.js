@@ -95,7 +95,6 @@ var Form = React.createClass({
 
     handleNameChange: function (e) {
         this.setState({ name: e.target.value });
-        console.log(this.state.name);
     },
     handleEmailChange: function (e) {
         this.setState({ email: e.target.value });
@@ -105,6 +104,24 @@ var Form = React.createClass({
     },
     handleMessageChange: function (e) {
         this.setState({ message: e.target.value });
+    },
+    handleSubmit: function (e) {
+        e.preventDefault();
+        var name = this.state.name.trim();
+        var email = this.state.email.trim();
+        var subject = this.state.subject;
+        var message = this.state.message.trim();
+
+        if (!name || !email || !subject || !message) {
+            return;
+        }
+        this.props.onContactSubmit({
+            id: this.props.idNumber,
+            name: name,
+            email: email,
+            subject: subject,
+            message: message
+        });
     },
 
     render: function () {
@@ -116,7 +133,7 @@ var Form = React.createClass({
 
         return React.createElement(
             "form",
-            null,
+            { onSubmit: this.handleSubmit },
             React.createElement(
                 "div",
                 { className: "form-group" },
@@ -174,6 +191,11 @@ var Form = React.createClass({
                     "Mensagem"
                 ),
                 React.createElement("textarea", { className: "form-control", onChange: this.handleMessageChange, rows: "3", style: InputStyle })
+            ),
+            React.createElement(
+                Button,
+                { textActive: "Loading..." },
+                "Enviar."
             )
         );
     }

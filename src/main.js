@@ -21,6 +21,14 @@ var Page = React.createClass({
             ]}
     },
 
+    handleContactSubmit: function(contact){
+        console.log(contact);
+        var newContacts = this.state.data.concat([contact]);
+        this.setState({
+            data: newContacts
+        });
+    },
+
    render:function(){
        return(
             <myElement>
@@ -30,10 +38,7 @@ var Page = React.createClass({
                         Reclame Aqui!
                     </Title>
                     <div className="row">
-                        <Form />
-                        <Button textActive="Loading...">
-                            Enviar.
-                        </Button>
+                        <Form onContactSubmit={this.handleContactSubmit} idNumber={this.state.data.length + 1} />
                     </div>
                     <div className="row">
                         <List data={this.state.data} />

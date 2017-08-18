@@ -71,13 +71,12 @@ var Form = React.createClass({
             name:'',
             email:'',
             subject:'3',
-            message:'',
+            message:''
         }
     },
 
     handleNameChange:function(e){
         this.setState({name: e.target.value});
-        console.log(this.state.name);
     },
     handleEmailChange:function(e){
         this.setState({email: e.target.value});
@@ -88,6 +87,24 @@ var Form = React.createClass({
     handleMessageChange:function(e){
         this.setState({message: e.target.value});
     },
+    handleSubmit:function(e){
+        e.preventDefault();
+        var name = this.state.name.trim();
+        var email = this.state.email.trim();
+        var subject = this.state.subject;
+        var message = this.state.message.trim();
+
+        if(!name || !email || !subject || !message){
+            return;
+        }
+        this.props.onContactSubmit({
+            id: this.props.idNumber,
+            name: name,
+            email:email,
+            subject:subject,
+            message:message
+        });
+    },
 
    render: function() {
        var InputStyle = {
@@ -97,7 +114,7 @@ var Form = React.createClass({
        };
 
        return (
-           <form>
+           <form onSubmit={this.handleSubmit}>
                <div className="form-group">
                    <label htmlFor="name">Name</label>
                    <input type="text" className="form-control" onChange={ this.handleNameChange } placeholder="Name" style={InputStyle}/>
@@ -118,6 +135,9 @@ var Form = React.createClass({
                    <label htmlFor="message">Mensagem</label>
                    <textarea className="form-control" onChange={this.handleMessageChange} rows="3" style={InputStyle}/>
                </div>
+               <Button textActive="Loading...">
+                   Enviar.
+               </Button>
            </form>
        );
    }

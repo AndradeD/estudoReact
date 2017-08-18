@@ -17,6 +17,14 @@ var Page = React.createClass({
             }] };
     },
 
+    handleContactSubmit: function (contact) {
+        console.log(contact);
+        var newContacts = this.state.data.concat([contact]);
+        this.setState({
+            data: newContacts
+        });
+    },
+
     render: function () {
         return React.createElement(
             'myElement',
@@ -33,12 +41,7 @@ var Page = React.createClass({
                 React.createElement(
                     'div',
                     { className: 'row' },
-                    React.createElement(Form, null),
-                    React.createElement(
-                        Button,
-                        { textActive: 'Loading...' },
-                        'Enviar.'
-                    )
+                    React.createElement(Form, { onContactSubmit: this.handleContactSubmit, idNumber: this.state.data.length + 1 })
                 ),
                 React.createElement(
                     'div',
